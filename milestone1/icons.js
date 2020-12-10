@@ -23,7 +23,15 @@ Creiamo array di oggetti per le icone con le seguenti proprieta: name, prefix, t
     new icon("DRAGON" , "fas" , "fa-dragon" , "animals" ),
     new icon("HORSE" , "fas" , "fa-horse" , "animals" ),
     new icon("HIPPO" , "fas" , "fa-hippo" , "animals" ),
-    new icon("FISH" , "fas" , "fa-fish" , "animals" )
+    new icon("FISH" , "fas" , "fa-fish" , "animals" ),
+    new icon("CARROT" , "fas" , "fa-carrot" , "Fruits & Vegetables" ),
+    new icon("APPLE-ALT" , "fas" , "fa-apple-alt" , "Education" ),
+    new icon("LEMON" , "fas" , "fa-lemon" , "Summer" ),
+    new icon("PEPPER-HOT" , "fas" , "fa-pepper-hot" , "Fruits & Vegetables" ),
+    new icon("USER-ASTRONAUT" , "fas" , "fa-user-astronaut" , "Science Fiction" ),
+    new icon("USER-GRADUATE" , "fas" , "fa-user-graduate" , "Users & People" ),
+    new icon("USER-NINJA" , "fas" , "fa-user-ninja" , "Users & People" ),
+    new icon("USER-SECRET" , "fas" , "fa-user-secret" , "Users & People" )
   ];
 
   console.log(arrayIcone);
@@ -44,19 +52,26 @@ Selezioniamo il container icons
 
   //Creo una funzione con ciclo forEach che cicli tra gli oggetti e inserisca nel markup le icons
 
-  arrayIcone.forEach(icons => {
-    let iconName = icons.name;
-    let iconPrefix = icons.prefix;
-    let iconType = icons.type;
-    let iconFamily = icons.family;
 
-    let markup = `
-    <div>
+  function milestone1() {
+
+    arrayIcone.forEach(icons => {
+      let iconName = icons.name;
+      let iconPrefix = icons.prefix;
+      let iconType = icons.type;
+      let iconFamily = icons.family;
+
+      let markup = `
+      <div>
       <i class="${iconPrefix} ${iconType}" style="color:black"></i>
       <div class="title">${iconName}</div>
-    </div>
-    `
-    iconsDiv.append(markup);
-  });
+      </div>
+      `
+      iconsDiv.append(markup);
+    });
+
+  }
+
+  milestone1();
 
 });
