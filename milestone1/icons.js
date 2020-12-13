@@ -14,8 +14,8 @@ Creiamo array di oggetti per le icone con le seguenti proprieta: name, prefix, t
     }
   };
 
-  //Creazione dell'array di oggetti icone
-  let arrayIcone = [
+  //Creazione dell'array di oggetti icone che definisco con const in quanto non varieranno successivamente nel codice.
+  const arrayIcone = [
     new icon("CAT" , "fas" , "fa-cat" , "animals" ),
     new icon("CROW" , "fas" , "fa-crow" , "animals" ),
     new icon("DOG" , "fas" , "fa-dog" , "animals" ),
@@ -40,38 +40,44 @@ Creiamo array di oggetti per le icone con le seguenti proprieta: name, prefix, t
 Selezioniamo il container icons
 ************************************************/
 
-  //Seleziono il container icons usando jquery
-  const iconsDiv = $('.icons');
+  //Seleziono il container icons attraverso il querySelector che mi permette di indicare la classe dell'elemento da selezionare.
 
-  console.log(iconsDiv);
-
+  const iconsContainer = document.querySelector('.icons');
 
 /*****************************************************
  Inseriamo le icone nel container (possiamo creare una funzione tipo print() per inserire gli elementi e richiamarla qui)
 *****************************************************/
 
-  //Creo una funzione con ciclo forEach che cicli tra gli oggetti e inserisca nel markup le icons
+  print(arrayIcone , iconsContainer);
 
 
-  function milestone1() {
+/************** FUNZIONI **************/
 
-    arrayIcone.forEach(icons => {
-      let iconName = icons.name;
-      let iconPrefix = icons.prefix;
-      let iconType = icons.type;
-      let iconFamily = icons.family;
+  //Creo una funzione print con ciclo forEach che cicli tra gli oggetti e inserisca nel markup le icons
 
-      let markup = `
-      <div>
-      <i class="${iconPrefix} ${iconType}" style="color:black"></i>
-      <div class="title">${iconName}</div>
-      </div>
-      `
-      iconsDiv.append(markup);
+
+  function print(array, selectorContainer) {
+
+    array.forEach(iconElement => {
+
+      //Per assegnare le proprietà name, prefix e type a delle variabili, uso il destructuring al posto di creare singole variabili che prendano le varie proprietà.
+
+      const {name, prefix, type} = iconElement;
+
+      //Creo il markup da inserire nel contenitore
+
+        let markup =
+          `
+          <div>
+          <i class="${prefix} ${type}" style="color:black"></i>
+          <div class="title">${name}</div>
+          </div>
+          `;
+
+        //"Stampo" all'interno del contenitore selezionato, il markup da inserire per ottenere le icone.
+        selectorContainer.insertAdjacentHTML('beforeend',markup);
     });
 
   }
-
-  milestone1();
 
 });
