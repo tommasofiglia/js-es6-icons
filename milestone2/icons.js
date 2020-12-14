@@ -1,19 +1,18 @@
 $(document).ready(function () {
-/*****************************************
-Qui le icone definite nel milestone 1
-*****************************************/
+/**********************************************
+Qui le icone che abbiamo definito nella milestone 1
+**********************************************/
 
-     class icon {
-      constructor(name, prefix, type, family) {
-        this.name = name;
-        this.prefix = prefix;
-        this.type = type;
-        this.family = family;
-      }
-    };
+  class icon {
+    constructor(name, prefix, type, family) {
+      this.name = name;
+      this.prefix = prefix;
+      this.type = type;
+      this.family = family;
+    }
+  };
 
-    //Creazione dell'array di oggetti icone
-    let arrayIcone = [
+  const arrayIcone = [
     new icon("CAT" , "fas" , "fa-cat" , "animals" ),
     new icon("CROW" , "fas" , "fa-crow" , "animals" ),
     new icon("DOG" , "fas" , "fa-dog" , "animals" ),
@@ -32,67 +31,66 @@ Qui le icone definite nel milestone 1
     new icon("USER-SECRET" , "fas" , "fa-user-secret" , "Users & People" )
   ];
 
-    console.log(arrayIcone);
+  console.log(arrayIcone);
 
-    //Seleziono il container icons usando jquery
-    const iconsDiv = $('.icons');
+  const iconsContainer = document.querySelector('.icons');
 
-    console.log(iconsDiv);
 
-    //aggiungiamo dei colori usando una funzione
+  /*************************************************
+   Definiamo dei colori per le icone (blue, orange, purple)
+   Aggiungiamo dei colori usando una funzione
+   Inseriamo le icone colorate nel container
+  **************************************************/
 
-    changeColor(arrayIcone);
-    console.log(arrayIcone);
+  // Creiamo un nuovo Array in grado di mappare l'array precedente per crearne un altro che rispetti la divisione per colore
 
-    //Richiamo la funzione che crea le icone in html (Vista nel milestone1) che però stavolta ho modificato affinché, in base al colore assegnato, cambi lo style dell'icona in html.
-
-    milestone1Modificata();
-
-/* ---- FUNCTIONS ----*/
-
-//1. Funzione milestone 1 Rivisitata
-  function milestone1Modificata() {
-
-      arrayIcone.forEach(icons => {
-        let iconName = icons.name;
-        let iconPrefix = icons.prefix;
-        let iconType = icons.type;
-        let iconFamily = icons.family;
-
-        if (icons.color === "blue") {
-          var markup = `
-          <div>
-          <i class="${iconPrefix} ${iconType}" style="color:blue"></i>
-          <div class="title">${iconName}</div>
-          </div>
-          `;
-        } else if (icons.color === "orange") {
-          var markup = `
-          <div>
-          <i class="${iconPrefix} ${iconType}" style="color:orange"></i>
-          <div class="title">${iconName}</div>
-          </div>
-          `;
-        } else if (icons.color === "purple") {
-          var markup = `
-          <div>
-          <i class="${iconPrefix} ${iconType}" style="color:purple"></i>
-          <div class="title">${iconName}</div>
-          </div>
-          `;
-        }
-
-        iconsDiv.append(markup);
-      });
-
-  };
-
-//2. funzione per assegnare un colore ad un icona
-
-  function changeColor(array) {
-    for (var i = 0; i < array.length; i++) {
-      array[i].family === "animals" ? array[i].color = "blue" :  array[i].family === "Fruits & Vegetables" || array[i].family === "Education" || array[i].family === "Summer" ? array[i].color = "orange" : array[i].color = "purple";
+    const arrayIconeColori = arrayIcone.map(element =>{
+      // Impostiamo un if che ci selezioni solo alcuni oggetti dell'array "arrayIcone" in base al type e dia a queste selezioni dei colori.
+      if (element.family === "animals") {
+          element.color = "blue";
+      } else if (element.family === "Fruits & Vegetables" || element.family === "Summer" || element.family === "Education"){
+        element.color = "yellow";
+      } else if (element.family === "Users & People" || element.family === "Science Fiction"){
+        element.color = "purple";
+      }
     }
-  }
+    );
+
+  // Stampa delle icone colorate attraverso
+
+    print(arrayIcone, iconsContainer);
 
 });
+
+
+/* ---- FUNCTIONS ----*/
+/**************************************
+Funzione milestone 1
+*************************************/
+
+function print(array, selectorContainer) {
+
+  array.forEach(iconElement => {
+
+    const {name, prefix, type, color} = iconElement; //Cosi si destruttura un elemento, cioé le sue proprietà vengono "Estratte" dagli elementi.
+
+      let markup =
+        `
+        <div>
+        <i class="${prefix} ${type}" style="color:${color}"></i>
+        <div class="title">${name}</div>
+        </div>
+        `;
+
+      //"Stampo" all'interno del contenitore selezionato, il markup da inserire per ottenere le icone.
+      selectorContainer.insertAdjacentHTML('beforeend',markup);
+  });
+
+}
+
+//2. funzione per assegnare un colore ad un icona
+// tip: possiamo invocare qui dentro un'altra funzione (2) oppure usare map
+
+
+//3. funzione per ottenere da un array
+// tip: possiamo usarla nella funzione precedente oppure usare map senza creare questa funzione.

@@ -50,7 +50,6 @@ Selezioniamo il container icons
 
   print(arrayIcone , iconsContainer);
 
-
 /************** FUNZIONI **************/
 
   //Creo una funzione print con ciclo forEach che cicli tra gli oggetti e inserisca nel markup le icons
